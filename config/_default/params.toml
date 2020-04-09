@@ -12,7 +12,7 @@
 theme = "minimal"
 
 # Enable users to switch between day and night mode?
-day_night = false
+day_night = true
 
 # Override the theme's font set (optional).
 #   Latest font sets (may require updating): https://sourcethemes.com/academic/themes/
@@ -54,8 +54,10 @@ description = "Who am I in this manipulated world? A lost sheep seeking for piou
 # Documentation: https://sourcethemes.com/academic/docs/writing-markdown-latex/#highlighting-options
 highlight = true
 highlight_languages = ["r"]  # Add support for highlighting additional languages
-# highlight_style = "github"  # For supported styles, see https://cdnjs.com/libraries/highlight.js/
+highlight_style = "atelier-sulphurpool-light"  # For supported styles, see https://cdnjs.com/libraries/highlight.js/
 
+# atelier-heath-light, atelier-lakeside-light
+# atelier-sulphurpool-light
 # Enable LaTeX math rendering? true/false
 #   If false, you can enable math on a per page basis as needed.
 math = true
@@ -103,12 +105,12 @@ appointment_url = ""
 # Contact links
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
 contact_links = [
-  # {icon = "twitter", icon_pack = "fab", name = "DM Me", link = "https://twitter.com/joocxi"},
-  # {icon = "facebook", icon_pack = "fab", name = "FB Me", link = "https://facebook.com/joocxi"},
+  {icon = "twitter", icon_pack = "fab", name = "DM Me", link = "https://twitter.com/joocxi"},
+  {icon = "facebook", icon_pack = "fab", name = "FB Me", link = "https://facebook.com/joocxi"},
   # {icon = "skype", icon_pack = "fab", name = "Skype Me", link = "skype:echo123?call"},
   # {icon = "keybase", icon_pack = "fab", name = "Chat on Keybase", link = "https://keybase.io/"},
   # {icon = "comments", icon_pack = "fas", name = "Discuss on Forum", link = "https://discourse.gohugo.io"},
-  # {icon = "telegram", icon_pack = "fab", name = "Telegram Me", link = "https://telegram.me/@Telegram"},
+  {icon = "telegram", icon_pack = "fab", name = "Telegram Me", link = "https://telegram.me/@joocxi"},
   ]
 
 ############################
@@ -119,7 +121,7 @@ contact_links = [
 sharing_image = ""
 
 # Twitter username (without @). Used when a visitor shares your site on Twitter.
-twitter = ""
+twitter = "joocxi"
 
 ############################
 ## Regional Settings
@@ -145,7 +147,7 @@ main_menu = {align = "l", show_logo = true}
 reading_time = true
 
 # Display next/previous section pager? (true/false)
-section_pager = false
+section_pager = true
 docs_section_pager = true  # Display pager in Docs layout (e.g. tutorials)?
 
 # Enable in-built social sharing buttons? (true/false)
@@ -204,10 +206,10 @@ plugins_js  = []
   #   0: Disabled
   #   1: Disqus (https://disqus.com)
   #   2: Commento (https://commento.io)
-  engine = 0
+  engine = 1
 
   # Which page types are commentable?
-  commentable = {page = true, post = true, docs = true, project = true, publication = true, talk = true}
+  commentable = {page = true, post = true, docs = true, project = true, publication = true, talk = false}
 
   # Configuration of Disqus.
   [comments.disqus]

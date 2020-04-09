@@ -1,6 +1,7 @@
 ---
-layout: "post"
+date: 2020-01-19
 title: "Invertible Residual Networks for Generative Modeling"
+tags: ["generative model", "residual networks"]
 ---
 
 If you have been involving in machine learning for a while, you should have known about residual networks, which are proved to be powerful for image classification. Yet, apart from classification, they can be made invertible by some simple tricks to be used in other machine learning tasks as well. This family of residual networks called **Invertible Residual Networks** has been proposed  recently by J Behrmann, 2018. In this blog post, I will walk you through the invention of invertible residual networks.
@@ -119,8 +120,8 @@ $$\begin{align}
 It is easy to realize that the last equation is literally a variables change formula with transformation $F$. This does make sense because a normalizing flow can also be viewed as a change of variables but with a much more complex invertible transformation. Here, $F$ is clearly invertible as it is a composition of an arbitrary number of invertible functions.
 
 By designing an appropriate $F$, we can obtain an arbitrarily complex normalized density function at the completion of a normalizing flow. Hence, normalizing flows can be intuitively interpreted as a systematic way to distort the input density function, making it more complex (like in variational inference setting) or simpler (like in density estimation setting). However, in order for normalizing flows to be useful in practice, we need to have two conditions satisfied
-* The determinant of their Jacobian matrices $J_{f_k}$ need to be **easy to compute**, in order to obtain a tractable likelihood.
-* Those transformation functions $f_k$ obviously need to be **invertible**.
+* The determinant of their Jacobian matrices $J_{f_k}$ need to be `easy to compute`, in order to obtain a tractable likelihood.
+* Those transformation functions $f_k$ obviously need to be `invertible`.
 
 In fact, many approaches have been proposed to construct those easy-to-use transformation functions lately. Inspired by normalizing flows, the authors of the paper has also managed to exploit residual networks as transformation functions used for normalizing flows. Thus, before diving into the details, let take a look back at the architecture of residual networks.
 
@@ -154,10 +155,10 @@ In the inverse phase, each block takes $z$ as input and produces $x$ as output. 
 From $(1)$, we have
 $$x = z - g(x)$$
 
-Let define $h(x) = z - g(x)$ to be a function of $x$, where z acts as a constant. The requirement can now be formulated as follows: The equation $x = h(x)$ must have only one root or, to put it in a formal way, **$h(x)$ has a unique fixed point**.
+Let define $h(x) = z - g(x)$ to be a function of $x$, where z acts as a constant. The requirement can now be formulated as follows: The equation $x = h(x)$ must have only one root or, to put it in a formal way, `$h(x)$ has a unique fixed point`.
 
 > **Fixed point:**
-> Let X be a metric space and let T: X &rightarrow; X be a mapping in X. A **fixed point** of T is a point in X such that T(x) = x.
+> Let X be a metric space and let T: X &rightarrow; X be a mapping in X. A `fixed point` of T is a point in X such that T(x) = x.
 
 Fortunately, this requirement can be obtained according to the famous Banach fixed-point theorem.
 
@@ -170,7 +171,7 @@ The Banach fixed point theorem, also called contraction mapping theorem, states 
 >
 > $$\quad d(T(x), T(y)) \leq k d(x, y) , \quad \quad \forall x, y \in M$$
 >
->The smallest $k$ for which the above inequality holds is called the **Lipschitz constant** of $f$, denoted by $Lip(T)$
+>The smallest $k$ for which the above inequality holds is called the `Lipschitz constant` of $f$, denoted by $Lip(T)$
 
 **Banach theorem:** Let $(M, d)$ be a complete metric space and $T$: $M$ &rightarrow; $M$ be a contraction mapping. Then T has a unique fixed point $x \in M$. Furthermore, if $y \in M$ is arbitrary chosen, then the iterates $\{ {x_n}\}_{n=0}^\infty$, given by
 
@@ -211,7 +212,7 @@ Hence $g$ can be implemented as a composition of contractive linear or nonlinear
   <p align="center">Figure 3. Contractive residual mapping<p align="center">
 </p>
 
-* For nonlinear mappings, **ReLU**, **ELU** and **tanh** are the possible choices for contraction constraint.
+* For nonlinear mappings, `ReLU`, `ELU` and `tanh` are the possible choices for contraction constraint.
 * For linear mappings, implemented as convolutional layers $W_i$, they can be made contractive by satisfying the condition $$\lVert W_i \rVert_2 < 1 \quad \forall W_i$$ where $\lVert a \rVert_2$ denotes the spectral norm of matrix a.
 
 > **Spectral norm of a matrix:**
@@ -252,7 +253,8 @@ For each residual block $f$, we have
 
 <div>
 $$\begin{align}
-\ln \left\lvert \det J_f(x)\right\rvert & = \ln (\det J_f(x)) \textrm{( $\det J_f$ is always positive)} \\
+& \ln \left\lvert \det J_f(x)\right\rvert \\
+& = \ln (\det J_f(x)) \textrm{( $\det J_f$ is always positive)} \\
 & = tr(\ln J_f(x)) \textrm{($\ln \det A = tr(\ln(A))$)} \\
 & = tr(ln\frac{\partial f}{\partial x}) \\
 & = tr(ln\frac{\partial (x + g(x))}{\partial x})\\
@@ -299,7 +301,7 @@ v^T J_g^k v & = v^T w_k \\
 
 which requires now only matrix-vector multiplication.
 
-Furthermore, the term $w_k$ can be evaluated roughly as the same cost as evaluating $g$ using **reverse-mode automatic differentiation**, alleviating the heavy computation of evaluating $J_g$ explicitly.
+Furthermore, the term $w_k$ can be evaluated roughly as the same cost as evaluating $g$ using `reverse-mode automatic differentiation`, alleviating the heavy computation of evaluating $J_g$ explicitly.
 
 <p align="center">
   <img src="https://i.imgur.com/ovaeC6i.png" width="300px"/>

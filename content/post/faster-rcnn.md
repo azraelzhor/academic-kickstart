@@ -1,6 +1,8 @@
 ---
-layout: "post"
+date: 2020-02-15
 title: "Dive into Faster RCNN"
+toc: true
+tags: ["object detection", "rcnn"]
 ---
 
 Last year, I had a chance to be involved in an Advanced Computer Vision class held by a non-profit organization. During the class, object detection is one of the fields that I found myself interested in the most. This motivated me to write a series of blogs in order to understand better some famous approaches that has been applied in the field. Though, the idea has been postponed until recently :v. The first part of this series is about Faster RCN, one of the state-of-the-art method used for object detection. In this blog post, I will walk you through the detail of Faster RCNN. Hopefully, at the end of this blog, you would figure out the way Faster RCNN works.
