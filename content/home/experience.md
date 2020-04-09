@@ -2,7 +2,7 @@
 # Experience widget.
 widget = "experience"  # See https://sourcethemes.com/academic/docs/page-builder/
 headless = true  # This file represents a page section.
-active = false  # Activate this widget? true/false
+active = true  # Activate this widget? true/false
 weight = 30  # Order that this section will appear.
 
 title = "Experience"
@@ -18,27 +18,50 @@ date_format = "Jan 2006"
 #   Leave `date_end` empty if it's your current employer.
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 [[experience]]
-  title = "CEO"
-  company = "GenCoin"
-  company_url = ""
-  location = "California"
-  date_start = "2017-01-01"
+  title = "Data Scientist"
+  company = "Hiip.asia"
+  company_url = "https://hiip.asia"
+  location = "Vietnam"
+  date_start = "2019-03-01"
   date_end = ""
   description = """
   Responsibilities include:
 
-  * Analysing
-  * Modelling
-  * Deploying
+  * Influencer Recommender System
+  * Sentiment/Relevant analysis
+  * Topic Image Analysis
+  * Deploying AI modules
   """
 
 [[experience]]
-  title = "Professor"
-  company = "University X"
+  title = "Teaching Assistant"
+  company = "VietAI"
+  company_url = "http://vietai.org"
+  location = "Vietnam"
+  date_start = "2018-07-01"
+  date_end = "2019-08-01"
+  description = """Work as teaching assistant in some VietAI courses for ML beginners."""
+
+[[experience]]
+  title = "Research Engineer"
+  company = "Graphicsminer"
+  company_url = "http://graphicsminer.com"
+  location = "Vietnam"
+  date_start = "2017-07-01"
+  date_end = "2019-01-09"
+  description = """
+  * Research and build a QA system
+  """
+
+[[experience]]
+  title = "Teaching Assistant"
+  company = "HCMUT"
   company_url = ""
-  location = "California"
-  date_start = "2016-01-01"
-  date_end = "2016-12-31"
-  description = """Taught electronic engineering and researched semiconductor physics."""
+  location = "Vietnam"
+  date_start = "2017-05-01"
+  date_end = "2016-01-01"
+  description = """
+  Work as teaching assistant in some VietAI courses for ML beginners."""
+
 
 +++
