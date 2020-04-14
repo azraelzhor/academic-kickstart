@@ -3,7 +3,7 @@
 widget = "experience"  # See https://sourcethemes.com/academic/docs/page-builder/
 headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
-weight = 30  # Order that this section will appear.
+weight = 35  # Order that this section will appear.
 
 title = "Experience"
 subtitle = ""
@@ -24,14 +24,7 @@ date_format = "Jan 2006"
   location = "Vietnam"
   date_start = "2019-03-01"
   date_end = ""
-  description = """
-  Responsibilities include:
-
-  * Influencer Recommender System
-  * Sentiment/Relevant analysis
-  * Topic Image Analysis
-  * Deploying AI modules
-  """
+  description = """"""
 
 [[experience]]
   title = "Teaching Assistant"
@@ -40,7 +33,7 @@ date_format = "Jan 2006"
   location = "Vietnam"
   date_start = "2018-07-01"
   date_end = "2019-08-01"
-  description = """Work as teaching assistant in some VietAI courses for ML beginners."""
+  description = """"""
 
 [[experience]]
   title = "Research Engineer"
@@ -49,9 +42,7 @@ date_format = "Jan 2006"
   location = "Vietnam"
   date_start = "2017-07-01"
   date_end = "2019-01-09"
-  description = """
-  * Research and build a QA system
-  """
+  description = """"""
 
 [[experience]]
   title = "Teaching Assistant"
@@ -60,8 +51,7 @@ date_format = "Jan 2006"
   location = "Vietnam"
   date_start = "2017-05-01"
   date_end = "2016-01-01"
-  description = """
-  Work as teaching assistant in some VietAI courses for ML beginners."""
+  description = """"""
 
 
 +++
