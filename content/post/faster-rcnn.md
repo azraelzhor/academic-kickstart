@@ -30,14 +30,14 @@ Let us take a look at the overall architecture of Faster RCNN. The model compris
 * The `region proposal module` takes feature map from a feature network and proposes regions.
 * The `Fast RCNN detector module` takes those regions to predict the classes that the object belongs to.
 
-![](https://i.imgur.com/Zsu3nEn.png)
+![](https://i.imgur.com/4lRSmhz.png)
 
 Note that the feature network, which is VGG in the context of this blog, is shared between both modules. Also, to easily keep track of the story, let us follow a specific case in which we are given an image of shape $320\times400\times3$.
 ### Feature Shared Network
 
-The original paper uses ZF-net and VGG-net as feature network. Though, we only discuss VGG in the scope of this blog. The VGG receives an input image and produce a feature map with reduced spatial size. This size is determined by the net structure. In case the of VGG, the image spatial size is reduced $16$ times at the output layer. Hence, in our example, the feature map's shape  is $320/16 \times400/16\times512$, or $20 \times 25 \times 512$. The number $512$ is due to the number of filters in the last layer of VGG.
+The original paper uses ZF-net and VGG-net as feature network. Though, we only discuss VGG in the scope of this blog. The VGG receives an input image and produce a feature map with reduced spatial size. This size is determined by the net structure. In the case of VGG, the image spatial size is reduced $16$ times at the output layer. Hence, in our example, the feature map's shape  is $320/16 \times400/16\times512$, or $20 \times 25 \times 512$. The number $512$ is due to the number of filters in the last layer of VGG.
 
-<img src="https://i.imgur.com/k1KMWGJ.png" width="400"/>
+<img src="https://i.imgur.com/qvI00RP.png" width="400"/>
 
 The feature map is then used for both `region proposal network` and `region-based convolutional neural network`, which will be discussed later.
 ### Region Proposal Network (RPN)
@@ -50,7 +50,7 @@ The goal of RPN is to propose regions that highly contain object. In order to do
 <!-- RPN accepts VGG feature map as input. -->
 
 Specifically, for each pixel spatial location on the VGG feature map, we generate a predefined number of fixed size anchors. The shape of these anchor boxes are determined by a combination of predefined scales and edge ratios. In our example, if we use $3$ scales $64$, $128$, $256$ and $3$ edge ratios $1:1$, $1:2$, $2:1$, there will be $3*3=9$ type of anchors at each pixel location. A total of $20 * 25 * 9 = 4500$ anchors will be generated as a result.
-![](https://i.imgur.com/lr07We4.png)
+![](https://i.imgur.com/VLFDqst.png)
 
 It is important to note that even though anchor boxes are created based on the feature map's spatial location, they reference to the original input image, in which anchor boxes generated from the same feature map pixel location are centered at the same point on the original input, as illustrated in this figure below.
 <img src="https://i.imgur.com/BNTidcL.png" width="400"/>
@@ -151,7 +151,7 @@ For RPN binary classification, the binary cross-entropy loss is used.
 #### Use RPN to propose regions
 After training, we use RPN to predict the bounding box coordinates at each feature map location.
 
-<img src="https://i.imgur.com/uNnQDrw.png" width="400"/>
+<img src="https://i.imgur.com/nDysZNy.png" width="400"/>
 
 <!-- $$\begin{align}
 \color{blue}{x} & = x_a + \color{red}{t_x}*w_a \\
@@ -196,7 +196,7 @@ like this figure below (given input of shape $4 \times 4$ or $5 \times 5$).
 
 ##### RoI used in Faster RCNN
 In Faster RCNN, we apply RoI pooling to a 3D proposed regions to obtain fixed-size regions. In our example, if $7\times7$ RoI pooling is used, those fixed-size regions have the shape of $7\times7\times512$.  
-<img src="https://i.imgur.com/YxF0Tt8.png" width="400"/>
+<img src="https://i.imgur.com/wrg3VTt.png" width="400"/>
 
 #### Detection Network
 Those fixed-size feature maps from RoI pooling are then flattened and subsequently fed into a fully connected network for final detection. The net consists of $2$ fully connected layers of $4096$ neurons, followed by other $2$ sibling fully connected layers - one has $N$ neurons for classifying proposals and the other has $4*(N - 1)$ neurons for bounding box regression, where $N$ denotes the number of classes, including the background. Note that when a bounding box is classified as background, regression is unneeded. Hence, it makes sense that we only need $4*(N - 1)$ neurons for regression in total.
@@ -218,14 +218,14 @@ where $r_{min}$ and $r_{max}$ are the two predefined thresholds.
 
 ##### Label for bounding box regression
 
-For regression, we also calculate the "ground-truth" deltas $(\color{red}{t_x^*, t_y^*, t_w^*, t_h^*})$ in the same fashion as those in RPN, but now based on each refined anchor box's coordinates from the RPN $(x_r, y_r, w_r, h_r)$ and its nearest ground-truth bounding box's coordinates $(\color{blue}{x^*, y^*, w^*, h^*})$.
+For regression, we also calculate the "ground-truth" deltas $({\color{red}{t_x^*, t_y^*, t_w^*, t_h^*}})$ in the same fashion as those in RPN, but now based on each refined anchor box's coordinates from the RPN $(x_r, y_r, w_r, h_r)$ and its nearest ground-truth bounding box's coordinates $({\color{blue}{x^*, y^*, w^*, h^*}})$.
 
 #### RCNN losses
 RCNN also uses smooth  L1 loss for regression and categorical cross-entropy loss for classification.
 
 Now, we are done walking through Faster RCNN. Its entire architecture can be pictured as follows
 
-![](https://i.imgur.com/ZcaFqbz.png)
+![](https://i.imgur.com/iWwog5a.png)
 
 [TODO - introduce Colab links]
 

@@ -7,7 +7,7 @@ toc: true
 
 Text data is everywhere. When having massive amounts of them, a need naturally arises is that we want them to be organized efficiently. A naive way is to organize them based on topics, meaning that text covering the same topics should be put into the same groups. The problem is that we do not know which topics a text document belongs to and manually labeling topics for all of them is very expensive. Hence, topic modeling comes as an efficient way to automatically discover abstract topics contained in these text documents.
 
-<img src="https://i.imgur.com/lQZ2f5r.png" width="400"/>
+<img src="https://i.imgur.com/lQZ2f5r.png" width="350"/>
 
 One of the most common topic models is Latent Dirichlet Allocation (LDA), was introduced long time ago (D. Blei et al, 2003) but is still powerful now. LDA is a complex, hierarchical latent variable model with some probabilistic assumptions over it. Thus, before diving into detail of LDA, let us review some knowledges about `latent variable model` and how to handle some problems associated with it.
 
@@ -15,8 +15,7 @@ One of the most common topic models is Latent Dirichlet Allocation (LDA), was in
 
 ## Latent variable model
 A latent variable model assumes that data, which we can observe, is controlled by some underlying unknown factor. This dependency is often parameterized by a known distribution along with its associated parameters, known as model parameter. A simple latent variable model consists of three parts: observed data $x$, latent variable $z$ that controls $x$ and model parameter $\theta$ like the picture below.
-
-<img src="https://i.imgur.com/bT71bXf.png" width="300"/>
+<img src="https://i.imgur.com/i3cEZQW.png" width="300"/>
 
 <!-- [TODO - example of latent variable model]
 For an example of latent variable models, imagine that you are an observer at a casino, where people are playing a dice game. The dice dealer rolls the dice at each turn. The dice values range from $1$ to $6$.
@@ -101,14 +100,12 @@ If you want to go into the details of EM, **Gaussian Mixture** (when $z$ is disc
 
 ### Variational Inference
 
-In many of the cases, the posterior distribution $p(z|x;\theta)$ we are interested in can not be inferred analytically, or in other words, it is intractable. This leads naturally to the field of `approximate inference`, in which we try to approximate the intractable posterior. Variational inference is such a technique in approximate inference which is fast and effective enough for a good approximation of $p(z|x;\theta)$.
+In many of the cases, the posterior distribution $p(z|x;\theta)$ we are interested in can not be inferred analytically, or in other words, it is intractable. This leads naturally to the field of `approximate inference`, in which we try to approximate the intractable posterior. Variational inference is such a technique in approximate inference which is fast and effective enough for a good approximation of $p(z|x;\theta)$. The process can be pictured as follows
+<img src="https://i.imgur.com/eqdLdPA.png" width="400"/>
 
-The idea of variational inference is simple that we reformulate the problem of inference as an optimization problem by
+As we can see, the idea of variational inference is simple that we reformulate the problem of inference as an optimization problem by
 * First, posit a variational family ${q(z;v)}$ controlled by variational parameter $v$
 * Then, find the optimal ${q(z;v^*)}$ in this family, which is as "close" to $p(z|x;\theta)$ as possible
-
-<img src="https://i.imgur.com/zXCukxg.png" width="400"/>
-<p align="center">Mean field approximation</p>
 
 Specifically, the goal of variational inference is then to minimize the $KL$ divergence between the variational family and the true posterior: $\mathop{min}_{q, v}KL({{q(z;v)}}||p(z|x;\theta))$. But how can we minimize such an intractable term?
 <!-- But how can we minimize a term that can not be evaluated analytically? -->
@@ -189,8 +186,7 @@ In our example above, the document is a categorical distribution over $K = 4$ `t
 ### Dirichlet distribution
 Another distribution which plays an important role in LDA is the Dirichlet distribution (hence the name LDA). Dirichlet distribution is a `continuous` multivariate probability distribution over a $(K-1)$-simplex, which can be seen as a set of $K$-dimensional vectors $x=[x_1, x_2, ..., x_K]$ such that each $x_k \geq 0$ and $\sum_{k=1}^Kx_k = 1$. For example, the 2-simplex is a triangle in $3D$ space (see figure below).
 
-<img src="https://i.imgur.com/3wvle5s.png" width="300"/>
-<p align="center">2-simplex in 3D space</p>
+<img src="https://i.imgur.com/XYL7AoT.png" width="300"/>
 
 
 The distribution is parameterized by a positive $K$-dimensional vector $\alpha$, with its probability density function defined as
@@ -243,7 +239,6 @@ The generative process can be pictured as above. Specifically,
 
 ### The two problems of LDA
 <img src="https://i.imgur.com/VUMrTKJ.png" width="400"/>
-<p align="center">LDA as a probabilistic graphical model</p>
 
 LDA is a latent variable model, consisting of: observed data $w$;  model parameters $\alpha, \beta$; and latent variables $z, \theta$; as shown in the figure above. Hence, just like any typical latent variable model, LDA also have two problems needed to be solved.
 
@@ -256,8 +251,7 @@ $$ -->
 Given a document $d$ has $N$ words $\{w_1^{(d)}, ..., w_N^{(d)}\}$ and model parameters $\alpha$, $\beta$; infer the posterior distribution $p(z, \theta| w^{(d)}; \alpha, \beta)$.
 
 We can then use mean-field approximation to approximate $p(z, \theta| w^{(d)}; \alpha, \beta)$, by introducing the mean-field variational distribution $q(z, \theta; \gamma, \phi) = q(\theta;\gamma)\prod_{i=1}^{N}q(z_i;\phi_i)$.
-<img src="https://i.imgur.com/O5a0mY3.png" width="250"/>
-<p align="center">The mean-field variational distribution</p>
+<img src="https://i.imgur.com/Tr25JyX.png" width="250"/>
 
 Deriving the ELBO to yield coordinate ascent update for each variational parameter is mathematically heavy so I will not put the mathematical stuff here. For reference, the derivation could be found in the Appendix of the original paper. Based on the coordinate ascent update, we obtain the optimal form for $q(\theta;\gamma)$ which is a Dirichlet distribution and each $q(z_i;\phi_i)$ which is a categorical distribution. The coordinate ascent algorithm then return the optimal parameters $\gamma^*, \phi^*$.
 
