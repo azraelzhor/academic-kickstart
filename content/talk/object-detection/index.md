@@ -1,7 +1,7 @@
 ---
 # Documentation: https://sourcethemes.com/academic/docs/managing-content/
 
-title: "Vietnamese Data Augmentation"
+title: "Object Detection"
 event:
 event_url:
 location:
@@ -16,15 +16,15 @@ abstract:
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: 2019-11-01
-date_end: 2019-11-01
+date: 2020-03-11
+date_end: 2020-03-11
 all_day: true
 
 # Schedule page publish date (NOT talk date).
-# publishDate: 2020-04-03T18:12:38+07:00
+# publishDate: 2020-04-16T22:21:45+07:00
 
 authors: []
-tags: [nlp, data augmentation, backtranslation]
+tags: [yolo, faster-rcnn]
 
 # Is this a featured talk? (true/false)
 featured: false
@@ -46,10 +46,10 @@ image:
 #   icon: twitter
 
 # Optional filename of your slides within your talk's folder or a URL.
-url_slides: https://docs.google.com/presentation/d/1FEAGnDSrlhPwC0xbpiiB92HABnpeW0j_AikzYcb5hwI/
+url_slides:
 
 url_code:
-url_pdf:
+url_pdf: https://drive.google.com/open?id=1IgmHoPLnrAzNrgaEbdMshEP4KGT1xJSM
 url_video:
 
 # Markdown Slides (optional).

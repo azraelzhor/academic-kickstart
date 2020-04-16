@@ -18,19 +18,19 @@ abstract:
 #   End time can optionally be hidden by prefixing the line with `#`.
 date: 2020-04-03T16:42:30+07:00
 date_end: 2020-04-03T16:42:30+07:00
-all_day: false
+all_day: true
 
 # Schedule page publish date (NOT talk date).
-publishDate: 2020-04-03T16:42:30+07:00
+# publishDate: 2020-04-03T16:42:30+07:00
 
 authors: []
-tags: []
+tags: [lda, topic modeling]
 
 # Is this a featured talk? (true/false)
 featured: false
 
 # Featured image
-# To use, add an image named `featured.jpg/png` to your page's folder. 
+# To use, add an image named `featured.jpg/png` to your page's folder.
 # Focal points: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.
 image:
   caption: ""
@@ -49,7 +49,7 @@ image:
 url_slides:
 
 url_code:
-url_pdf:
+url_pdf: https://drive.google.com/open?id=1rpk-ApeLEvRXYSnWI08AXyBdmthOiCYt
 url_video:
 
 # Markdown Slides (optional).

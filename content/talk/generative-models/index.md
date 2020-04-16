@@ -16,15 +16,15 @@ abstract:
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: 2020-04-03T16:41:51+07:00
-date_end: 2020-04-03T16:41:51+07:00
-all_day: false
+date: 2020-02-05
+date_end: 2020-02-05
+all_day: true
 
 # Schedule page publish date (NOT talk date).
-publishDate: 2020-04-03T16:41:51+07:00
+# publishDate: 2020-04-03T16:41:51+07:00
 
 authors: []
-tags: []
+tags: [generative models, vae, gan, flow-based]
 
 # Is this a featured talk? (true/false)
 featured: false
