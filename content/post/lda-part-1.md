@@ -1,6 +1,6 @@
 ---
 date: 2020-03-20
-title: "Variational Expectation Maximization for Latent Dirichlet Allocation - Part One"
+title: "Variational Expectation Maximization for Latent Dirichlet Allocation - Part 1"
 tags: ["latent dirichlet allocation", "lda", "topic modeling", "em", "variational inference", "variational em"]
 toc: true
 ---
@@ -11,7 +11,7 @@ Text data is everywhere. When having massive amounts of them, a need naturally a
 
 One of the most common topic models is Latent Dirichlet Allocation (LDA), was introduced long time ago (D. Blei et al, 2003) but is still powerful now. LDA is a complex, hierarchical latent variable model with some probabilistic assumptions over it. Thus, before diving into detail of LDA, let us review some knowledges about `latent variable model` and how to handle some problems associated with it.
 
->**Note:** My blog on LDA contains two parts. This is the first part about theoretical understanding of LDA. The  second part involves a basic implementation of LDA, which you can check out [here]().
+>**Note:** My blog on LDA contains two parts. This is the first part about theoretical understanding of LDA. The  second part involves a basic implementation of LDA, which you can check out [here]({{< ref "post/lda-part-2.md" >}}).
 
 ## Latent variable model
 A latent variable model assumes that data, which we can observe, is controlled by some underlying unknown factor. This dependency is often parameterized by a known distribution along with its associated parameters, known as model parameter. A simple latent variable model consists of three parts: observed data $x$, latent variable $z$ that controls $x$ and model parameter $\theta$ like the picture below.
@@ -272,11 +272,13 @@ Since the posterior $p(z, \theta| w^{(d)}; \alpha, \beta)$ can not be computed e
 * Initialize parameters $\alpha, \beta$ to $\alpha^{(0)}, \beta^{(0)}$
 * For each loop $t$ start from $0$
     * **E step**:
-        * For each document $d$, use mean-field approximation to approximate the posterior $p(z^{(d)}, \theta^{(d)}|w^{(d)};{{\alpha^{(t)}, \beta^{(t)}}})$:
-            * Introduce the mean-field $q(z, \theta; \gamma, \phi) = q(\theta;\gamma)\prod_{i=1}^{N}q(z_i;\phi_i)$
-            * Use coordinate ascent update algorithm to yield optimal $\gamma^*, \phi^*$
-    * **M step**: Maximize the expected log-likelihood
-        <div>$\mathop{max}_{{\alpha^{(t+1)}, \beta^{(t+1)}}} \mathrm{E}_{z, \theta \sim q(z, \theta; \gamma^{*}, \phi^{*})} {p(w, z, \theta ;{{\alpha^{(t+1)}, \beta^{(t+1)}}}})$</div>
+        * For each document $d$
+            * Introduce the mean-field $q(z, \theta; \gamma, \phi) = q(\theta;\gamma)\prod_{i=1}^{N}q(z_i;\phi_i)$ to approximate the posterior $p(z^{(d)}, \theta^{(d)}|w^{(d)};{{\alpha^{(t)}, \beta^{(t)}}})$
+            * Use coordinate ascent update algorithm to yield optimal $\gamma^{(d)}, \phi^{(d)}$
+    * **M step**: Maximize the expected log-likelihood (up to some constant) with respect to $\alpha, \beta$
+        <div>$$
+        \mathop{max}_{{\alpha^{(t+1)}, \beta^{(t+1)}}} \sum_{d=1}^{M} \mathrm{E}_{z, \theta \sim q(z, \theta; \gamma^{(d)}, \phi^{(d)})} {\log p(w, z, \theta ;{{\alpha^{(t+1)}, \beta^{(t+1)}}}})
+        $$</div>
     * If the convergence standard is satisfied, stop
 
 >**Note**: Actually, there are many techniques to solve the two problems of LDA. Though, we only discuss about Variational EM in the scope of this blog :v
